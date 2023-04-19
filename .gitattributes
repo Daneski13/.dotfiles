@@ -1,0 +1,3 @@
+.p10k.zsh linguist-vendored
+flavours/** linguist-generated
+!flavours/.config/flavours/config.toml

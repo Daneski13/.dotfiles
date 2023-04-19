@@ -1,0 +1,33 @@
+[colors]
+ansi = [
+    '#182835',
+    '#c0645b',
+    '#ee9986',
+    '#507d9f',
+    '#70797f',
+    '#5b7b9c',
+    '#d68371',
+    '#f3f2ee',
+]
+background = '182835'
+brights = [
+    '#9ba1a4',
+    '#c77053',
+    '#44505a',
+    '#70797f',
+    '#c7cac9',
+    '#f4f4f1',
+    '#4d82a5',
+    '#f6f6f3',
+]
+cursor_bg = '#f3f2ee'
+cursor_border = '#f3f2ee'
+cursor_fg = '#f3f2ee'
+foreground = '#f3f2ee'
+selection_bg = '#70797f'
+selection_fg = '#70797f'
+
+[colors.indexed]
+
+[metadata]
+name = 'Generated'

@@ -1,0 +1,18 @@
+[[item]]
+file = "~/.config/iTerm2/colors.itermcolors"
+template = "iterm2"
+rewrite = true
+hook = "python3 ~/.local/scripts/iterm2Color.py"
+
+[[item]]
+file = "~/.config/spicetify/Themes/Wallpaper/color.ini"
+template = "spotify"
+rewrite = true
+light = false
+
+[[item]]
+file = "~/.config/wezterm/colors/Generated.toml"
+template = "wezterm"
+rewrite = true
+# Wezterm will automatically reload the config when it changes, so this is a kinda hacky way to make it reload
+hook = "nvim -c '%s/Generated/Generated/g' -c 'wq' ~/.wezterm.lua"

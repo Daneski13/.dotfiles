@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+# https://github.com/ThePrimeagen/.dotfiles/blob/master/install
+
+# Install oh-my-zsh
+if [ -d ~/.oh-my-zsh ]; then
+    echo "oh-my-zsh is installed."
+else
+    echo "oh-my-zsh is not installed. Installing now..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    exec zsh
+fi
+
+pushd $DOTFILES
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+    echo "stow $folder"
+    stow -D $folder
+    stow $folder
+done
+popd

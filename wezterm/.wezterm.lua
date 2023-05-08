@@ -9,8 +9,20 @@ config = wezterm.config_builder()
 config.font = wezterm.font("Fira Code")
 config.enable_scroll_bar = true
 config.font_size = 15
-config.window_background_opacity = 0.9
-config.macos_window_background_blur = 26
+
+local OS = os.getenv("OS") or io.popen("uname"):read("*l")
+local alpha = 1
+if OS == "Windows_NT" then
+    alpha = 0
+    config.win32_system_backdrop = "Acrylic"
+elseif OS == "Darwin" then
+    alpha = 0.9
+    config.macos_window_background_blur = 26
+elseif OS == "Linux" then
+    alpha = 0.7
+end
+config.window_background_opacity = alpha
+
 config.hide_tab_bar_if_only_one_tab = true
 
 -- Colors

@@ -16,6 +16,9 @@ function vs() {
     code $1
 }
 
+# Edit dotfiles
+alias dotfiles="nvim $HOME/.dotfiles"
+
 # Change wallpaper and update pywal
 function wallpaper() {
     if [ $# -lt 1 ]; then

@@ -8,8 +8,11 @@ function rebase() {
 # Git
 alias g="git"
 
+# Fetch
+alias gf="git fetch"
 # Pull
 alias gpl="git pull --rebase"
+
 
 # Clone
 alias gcl="git clone --recursive"
@@ -22,9 +25,26 @@ alias gc="git commit"
 # Push
 alias gp="git push"
 
+# Diff
+alias gd="git diff"
+# Diff files
+alias gdf="git diff --name-only"
+# Diff staged
+alias gds="git diff --cached"
+# Diff remote
+alias gdr="git diff @{u}"
+
+# Status
+alias gstat="git status"
+
+# Log
+alias gl="git log --graph --pretty=oneline --abbrev-commit --decorate"
+
 # Submodules update
 alias gsu="git submodule update"
 
+# Banches
+alias gb="git branch"
 # Switch
 alias gsw="git switch"
 # Switch to new branch

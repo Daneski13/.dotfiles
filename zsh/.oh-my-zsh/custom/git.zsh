@@ -1,10 +1,5 @@
 # File contains git related aliases and functions
 
-# Rebase the last given number of commits
-function rebase() {
-    git rebase -i HEAD~$1
-}
-
 # Git
 alias g="git"
 
@@ -12,7 +7,6 @@ alias g="git"
 alias gf="git fetch"
 # Pull
 alias gpl="git pull --rebase"
-
 
 # Clone
 alias gcl="git clone --recursive"
@@ -54,3 +48,17 @@ alias gswn="git switch -c"
 alias gt="git tag -s"
 # Tag list
 alias gtl="git tag | sort -V"
+
+# Rebase the last given number of commits
+function g_rebase() {
+    git rebase -i HEAD~$1
+}
+
+# squash a range of commits
+function g_squash_all() {
+    # get the first commit
+    local first_commit=$(git rev-list --max-parents=0 HEAD)
+
+    # soft reset to the first commit
+    git reset --soft $first_commit
+}

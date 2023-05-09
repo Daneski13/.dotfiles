@@ -41,7 +41,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format)
 
 -- save the file
-vim.keymap.set({"n", "v"}, "<C-s>", "<cmd>w<CR>")
+vim.keymap.set({ "n", "v" }, "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<ESC><cmd>w<CR>a")
 
 -- F5 to reload the keymap

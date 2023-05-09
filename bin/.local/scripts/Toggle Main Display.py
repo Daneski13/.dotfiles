@@ -18,7 +18,8 @@ if len(params) == 14:
     new_ext_origin = tuple(-x for x in new_ext_origin)
 
     # replace the origin with the new one
-    display2_params[5] = display2_params[5][:7] + str(new_ext_origin).replace(" ", "")
+    display2_params[5] = display2_params[5][:7] + \
+        str(new_ext_origin).replace(" ", "")
 
     # swap the origins of display 1 and 2
     display1_params[5], display2_params[5] = display2_params[5], display1_params[5]
@@ -28,7 +29,8 @@ if len(params) == 14:
     display2: str = " ".join(display2_params)
 
     # Build the command to swap the displays
-    command = '/opt/homebrew/bin/displayplacer "{}" "{}"'.format(display2, display1)
+    command = '/opt/homebrew/bin/displayplacer "{}" "{}"'.format(
+        display2, display1)
 
     # execute the command
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE)

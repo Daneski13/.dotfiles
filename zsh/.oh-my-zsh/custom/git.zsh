@@ -32,7 +32,9 @@ alias gdr="git diff @{u}"
 alias gstat="git status"
 
 # Log
-alias gl="git log --graph --pretty=oneline --abbrev-commit --decorate"
+alias gl="git log --graph --date=relative --abbrev-commit --decorate --oneline"
+# Log full
+alias glf="git log --graph --date=relative --abbrev-commit --decorate"
 
 # Submodules update
 alias gsu="git submodule update"
@@ -49,16 +51,16 @@ alias gt="git tag -s"
 # Tag list
 alias gtl="git tag | sort -V"
 
-# Rebase the last given number of commits
+# Interactive rebase the last given number of commits
 function g_rebase() {
-    git rebase -i HEAD~$1
+	git rebase -i HEAD~$1
 }
 
-# squash a range of commits
+# squash a all commits
 function g_squash_all() {
-    # get the first commit
-    local first_commit=$(git rev-list --max-parents=0 HEAD)
+	# get the first commit
+	local first_commit=$(git rev-list --max-parents=0 HEAD)
 
-    # soft reset to the first commit
-    git reset --soft $first_commit
+	# soft reset to the first commit
+	git reset --soft $first_commit
 }

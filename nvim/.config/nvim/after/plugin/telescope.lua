@@ -15,5 +15,5 @@ vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
 
 -- "Find Grep" grep/find files with input
 vim.keymap.set('n', '<leader>fg', function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ") })
+	builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)

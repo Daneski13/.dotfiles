@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>a", mark.add_file)
 -- quick toggle menu "harpoon menu"
 vim.keymap.set("n", "<leader>hm", ui.toggle_quick_menu)
 
--- Toggle between files using left hand Colemak home + Alt/Opt
+-- Toggle between files using left hand Colemak home row + Alt/Opt
 vim.keymap.set("n", "†", function() ui.nav_file(1) end)
 vim.keymap.set("n", "ß", function() ui.nav_file(2) end)
 vim.keymap.set("n", "®", function() ui.nav_file(3) end)

@@ -7,8 +7,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Editor
 export EDITOR='nvim'
 
-# The Fuck
-eval $(thefuck --alias)
+# XDG config home
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Setting PATH for Python 3.10
 # The original version is saved in .zprofile.pysave

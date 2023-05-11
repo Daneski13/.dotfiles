@@ -23,7 +23,11 @@ require('packer').startup(function(use)
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		-- or                            , branch = '0.1.x',
-		requires = { { 'nvim-lua/plenary.nvim' } }
+		requires = {
+			{ 'nvim-lua/plenary.nvim' },
+			use { 'nvim-telescope/telescope-fzf-native.nvim', run =
+			'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+		}
 	}
 
 	-- Color scheme
@@ -47,7 +51,7 @@ require('packer').startup(function(use)
 	use('tpope/vim-rhubarb')
 	use('lewis6991/gitsigns.nvim')
 
-	-- proper tab width/space width
+	-- automagic tab width/space width for project
 	use('tpope/vim-sleuth')
 
 	-- commenting
@@ -70,6 +74,9 @@ require('packer').startup(function(use)
 		"windwp/nvim-autopairs",
 		config = function() require("nvim-autopairs").setup {} end
 	}
+
+	-- rooter
+	use {'airblade/vim-rooter'}
 
 	-- LSP/Completion
 	use {
@@ -98,6 +105,9 @@ require('packer').startup(function(use)
 			-- Snippets
 			{ 'L3MON4D3/LuaSnip' },
 			{ 'rafamadriz/friendly-snippets' },
+
+			-- Github copilot
+			{ 'zbirenbaum/copilot.lua' }
 		}
 	}
 	-- LSP progress
@@ -107,7 +117,14 @@ require('packer').startup(function(use)
 		end
 	}
 	-- Completion in vim cmd
-	use { 'gelguy/wilder.nvim' }
+	use { 'gelguy/wilder.nvim',
+		build = ':UpdateRemotePlugins',
+		requires = {
+			{ 'romgrk/fzy-lua-native' },
+			{ 'roxma/nvim-yarp' },
+			{ 'nixprime/cpsm' },
+		}
+	}
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+# Fuzzy find dirs
+
+# if there are not args grab from my collection
+# otherwise, fuzzy find on all dirs within the specified dir
+if [[ $# -eq 0 ]]; then
+	# git/worktree dirs up to 2 deep within projects folder
+	projects=$(find $PROJECTS -mindepth 1 -maxdepth 2 -type d -exec test -e {}/.git \; -print)
+	# dotfiles
+	dotfiles=$HOME/.dotfiles
+	dirs="$projects\n$dotfiles"
+else
+	# ensure dir exists
+	if [[ ! -d $1 ]]; then
+		echo "Directory does not exist"
+		exit 1
+	fi
+
+	# find all dirs on dir (but not .git and respect .gitignore)
+	dirs="$(fd -H --type d --exclude '.git' $1)"
+fi
+
+echo $(printf $dirs | fzf)

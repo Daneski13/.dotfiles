@@ -11,7 +11,7 @@ fi
 
 # Stow
 if [[ -z $STOW_FOLDERS ]]; then
-	STOW_FOLDERS="bin,nvim,zsh,flavours,wezterm"
+	STOW_FOLDERS="bin,nvim,zsh,flavours,wezterm,tmux"
 fi
 
 if [[ -z $DOTFILES ]]; then
@@ -28,7 +28,12 @@ if ! command -v nvim &>/dev/null; then
 	brew tap jakehilborn/jakehilborn
 	brew tap oven-sh/bun
 	# Install packages
-	brew install neovim ncurses displayplacer flavours automake autojump cmake ffmpeg fd gh spicetify/homebrew-tap/spicetify-cli node bun python swiftlint thefuck tree wget yarn ripgrep upx mint guile n pnpm diff-so-fancy
+	brew install git bat neovim ncurses displayplacer flavours automake autojump cmake ffmpeg fd gh spicetify/homebrew-tap/spicetify-cli node bun python swiftlint thefuck tree wget yarn ripgrep upx mint guile n pnpm diff-so-fancy fzf fzy luarocks
+
+	# Git settings
+	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX | bat"
+	git config --global interactive.diffFilter "diff-so-fancy --patch"
+	git config --global core.editor nvim
 
 	echo "Installing Casks..."
 	# Install Casks

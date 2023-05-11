@@ -8,17 +8,24 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # .local custom scripts
-export PATH=~/.local/scripts:$PATH
+if [[ ":$PATH:" != *":$HOME/.local/scripts:"* ]]; then
+    export PATH="$HOME/.local/scripts:$PATH"
+fi
 # .local bin
-export PATH=~/.local/bin:$PATH
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+# Spicetify
+export SPICETIFY_INSTALL="~/spicetify-cli"
+if [[ ":$PATH:" != *":$SPICETIFY_INSTALL:"* ]]; then
+    export PATH="$SPICETIFY_INSTALL:$PATH"
+fi
+
 # Projects folder
 export PROJECTS=~/Desktop/Projects
 # flavours directories
 export FLAVOURS_CONFIG_FILE=~/.config/flavours/config.toml
 export FLAVOURS_DATA_DIRECTORY=~/.config/flavours/
-# Spicetify
-export SPICETIFY_INSTALL="~/spicetify-cli"
-export PATH="$SPICETIFY_INSTALL:$PATH"
 
 # Load completion system
 autoload -U compinit; compinit
@@ -62,6 +69,9 @@ plugins=(
 	zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
+
+# The Fuck
+eval $(thefuck --alias)
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"

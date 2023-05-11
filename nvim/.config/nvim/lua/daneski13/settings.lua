@@ -2,15 +2,18 @@ HOME = os.getenv("HOME")
 
 -- ======== Behaviors ========
 
+-- netrw
+vim.g.netrw_liststyle = 3
+vim.g.netrw_keepdir = 0
+
 -- line numbers
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
 -- 4 space indenting
 vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.opt.expandtab = false
 -- auto indenting
 vim.opt.smartindent = true
 

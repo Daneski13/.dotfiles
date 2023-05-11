@@ -9,10 +9,16 @@ vim.g.mapleader = " "
 noremap_s("W", "5w")
 noremap_s("B", "5b")
 
--- select until end of line
-noremap_s([[\v]], [[v$h]])
+--  new window vertical
+vim.keymap.set("n", "<leader>wv", "<cmd>vsplit<CR>")
+--  new window horizontal
+vim.keymap.set("n", "<leader>wh", "<cmd>split<CR>")
+-- close current window
+vim.keymap.set("n", "<leader>wc", "<cmd>close<CR>")
+-- cycle through windows with tab
+vim.keymap.set("n", "<TAB>", "<C-w>w")
 
--- Change ~ to ` for flipping case
+-- Change ~ to ` for flipping case its just faster
 noremap_s("`", "~")
 
 -- : to ;
@@ -43,6 +49,9 @@ vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format)
 -- save the file
 vim.keymap.set({ "n", "v" }, "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<ESC><cmd>w<CR>a")
+
+-- chmod file "file x"
+vim.keymap.set("n", "<leader>fx", "<cmd>!chmod +x %<CR>")
 
 -- F5 to reload the keymap
 vim.keymap.set("n", '<F5>', ':luafile ~/.config/nvim/init.lua<CR>')

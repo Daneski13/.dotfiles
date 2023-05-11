@@ -6,6 +6,11 @@ alias f5="exec zsh"
 # Open the github page for the macos zsh plugin
 alias macos="open 'https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos'"
 
+# fuzzy find a dir and cd into it
+function fcd() {
+	cd "$(fzd $1)"
+}
+
 # Open in vscode
 function vs() {
 	if [ $# -lt 1 ]; then

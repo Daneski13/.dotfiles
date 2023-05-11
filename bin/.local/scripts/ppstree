@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+# Super simple python alternative to pstree, prints the process tree for a given PID
+
+
+import psutil as ps
+import sys
+
+
+def print_process_tree(pid: int):
+    # Get the process object for the given PID
+    process = ps.Process(pid)
+
+    # Print the process tree recursively
+    print_process_node(process, 0)
+
+
+def print_process_node(process: ps.Process, level: int):
+    # Print the process name with indentation based on level
+    print("|   " * level + "+-- {} {}".format(process.pid, process.name()))
+
+    # Recursively print the children of the process
+    for child in process.children():
+        print_process_node(child, level + 1)
+
+
+# Example usage: print the process tree of PID 1 (init process)
+print_process_tree(int(sys.argv[1]))

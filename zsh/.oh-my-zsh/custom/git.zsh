@@ -46,10 +46,25 @@ alias gsw="git switch"
 # Switch to new branch
 alias gswn="git switch -c"
 
+# Worktree
+alias gwt="git worktree"
+alias gwta="git worktree add"
+alias gwtr="git worktree remove"
+alias gwtl="git worktree list"
+
 # Tag
 alias gt="git tag -s"
 # Tag list
 alias gtl="git tag | sort -V"
+
+# Auto fetch git repos on dir change
+autoload -Uz add-zsh-hook
+function _fetch() {
+	if [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]; then
+		git fetch --quiet
+	fi
+}
+add-zsh-hook chpwd _fetch
 
 # Interactive rebase the last given number of commits
 function g_rebase() {

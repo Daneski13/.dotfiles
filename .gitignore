@@ -2,3 +2,5 @@
 nvim/.config/nvim/plugin/packer_compiled.lua
 personal.zsh
 .vscode/
+tmux/.tmux/plugins/*
+!tmux/.tmux/plugins/tpm

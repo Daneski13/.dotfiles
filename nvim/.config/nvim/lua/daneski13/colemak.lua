@@ -12,6 +12,7 @@ noremap_s("i", "l")
 noremap_s([[gu]], [[gk]])
 noremap_s([[ge]], [[gj]])
 
+
 -- end current word
 noremap_s("h", "e")
 noremap_s("H", "E")

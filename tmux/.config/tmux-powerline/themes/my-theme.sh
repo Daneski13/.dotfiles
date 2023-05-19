@@ -1,17 +1,17 @@
-# Default Theme
+# Dedault Theme
 
 if patched_font_in_use; then
-	TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="ㅤ"
-	TMUX_POWERLINE_SEPARATOR_LEFT_THIN="|"
-	TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="ㅤ"
-	TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="|"
-	TMUX_POWERLINE_SEPARATOR_NONE="ㅤ"
+    TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="ㅤ"
+    TMUX_POWERLINE_SEPARATOR_LEFT_THIN="|"
+    TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="ㅤ"
+    TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="|"
+    TMUX_POWERLINE_SEPARATOR_NONE="ㅤ"
 else
-	TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="◀"
-	TMUX_POWERLINE_SEPARATOR_LEFT_THIN="❮"
-	TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="▶"
-	TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="❯"
-	TMUX_POWERLINE_SEPARATOR_NONE="ㅤ"
+    TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="◀"
+    TMUX_POWERLINE_SEPARATOR_LEFT_THIN="❮"
+    TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="▶"
+    TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="❯"
+    TMUX_POWERLINE_SEPARATOR_NONE="ㅤ"
 fi
 
 TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR=${TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR:-'235'}
@@ -29,28 +29,28 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 # The `format regular` and `format inverse` functions are provided as conveinences
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_CURRENT ]; then
-	TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
-		"#[fg=black,bg=white]"
-		"$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
-		" #I "
-		"$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN"
-		" #W "
-	)
+    TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
+        "#[fg=black,bg=white]"
+        "$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
+        " #I "
+        "$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN"
+        " #W "
+    )
 fi
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_STYLE ]; then
-	TMUX_POWERLINE_WINDOW_STATUS_STYLE=(
-		"#[fg=white,bg=terminal]"
-	)
+    TMUX_POWERLINE_WINDOW_STATUS_STYLE=(
+        "#[fg=white,bg=terminal]"
+    )
 fi
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
-	TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-		"#[bg=colour235,fg=white]"
-		"  #I#{?window_flags, , } "
-		"$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN"
-		" #W "
-	)
+    TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
+        "#[bg=colour235,fg=white]"
+        "  #I#{?window_flags, , } "
+        "$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN"
+        " #W "
+    )
 fi
 
 # Format: segment_name background_color foreground_color [non_default_separator] [separator_background_color] [separator_foreground_color] [spacing_disable] [separator_disable]
@@ -81,16 +81,16 @@ fi
 # of options to support the spacing_disable and separator_disable features can be used
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
-	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info 220 234"
-	)
+    TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
+        "tmux_session_info 220 234"
+    )
 fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
-	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-		"pwd 89 255 ${TMUX_POWERLINE_SEPARATOR_NONE}"
-		"date_day terminal 252 ${TMUX_POWERLINE_SEPARATOR_NONE}"
-		"date terminal 252 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
-		"time terminal 252 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
-	)
+    TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
+        "pwd 89 255 ${TMUX_POWERLINE_SEPARATOR_NONE}"
+        "date_day terminal 252 ${TMUX_POWERLINE_SEPARATOR_NONE}"
+        "date terminal 252 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+        "time terminal 252 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+    )
 fi

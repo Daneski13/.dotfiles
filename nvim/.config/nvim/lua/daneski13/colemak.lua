@@ -1,41 +1,47 @@
-require('daneski13.utils')
+local utils = require("daneski13.utils")
 
 -- ==== Colemak ====
 --      ^
 --      u
 -- < n  e  i >
 --      v
-noremap_s("n", "h")
-noremap_s("e", "j")
-noremap_s("u", "k")
-noremap_s("i", "l")
-noremap_s([[gu]], [[gk]])
-noremap_s([[ge]], [[gj]])
+utils.noremap_s("n", "h")
+utils.noremap_s("e", "j")
+utils.noremap_s("u", "k")
+utils.noremap_s("i", "l")
+utils.noremap_s([[gu]], [[gk]])
+utils.noremap_s([[ge]], [[gj]])
 
+
+-- window nav using bindngs
+utils.noremap_s("<leader>wn", "<C-w>h")
+utils.noremap_s("<leader>we", "<C-w>j")
+utils.noremap_s("<leader>wu", "<C-w>k")
+utils.noremap_s("<leader>wi", "<C-w>l")
 
 -- end current word
-noremap_s("h", "e")
-noremap_s("H", "E")
+utils.noremap_s("h", "e")
+utils.noremap_s("H", "E")
 
 -- next key for searching
-noremap_s("j", "n")
-noremap_s("J", "N")
+utils.noremap_s("k", "n")
+utils.noremap_s("K", "N")
 
 -- insert key
-noremap_s("k", "i")
-noremap_s("K", "I")
+utils.noremap_s("j", "i")
+utils.noremap_s("J", "I")
 
 -- undo
-noremap_s("l", "u")
-noremap_s("L", "U")
+utils.noremap_s("l", "u")
+utils.noremap_s("L", "U")
 
 -- faster up/down nav
-noremap_s("U", "5kzz")
-noremap_s("E", "5jzz")
+utils.noremap_s("U", "5kzz")
+utils.noremap_s("E", "5jzz")
 -- start line
-noremap_s("N", "0")
+utils.noremap_s("N", "0")
 -- end line
-noremap_s("I", "$")
+utils.noremap_s("I", "$")
 
 -- Moves the selected line down one
 vim.keymap.set("v", "E", ":m '>+1<CR>gv=gv")

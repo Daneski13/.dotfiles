@@ -11,6 +11,12 @@ function fcd() {
 	cd "$(fzd $1)"
 }
 
+# fzf multi select with header
+# C-t will toggle all
+function fzf-m() {
+	fzf --multi --bind ctrl-t:toggle-all --header "$1"
+}
+
 # Open in vscode
 function vs() {
 	if [ $# -lt 1 ]; then

@@ -1,33 +1,96 @@
-require('daneski13.utils')
-require('daneski13.colemak')
+require("daneski13.colemak")
+local utils = require("daneski13.utils")
 
 -- ======== Mappings ========
 -- Leader key
 vim.g.mapleader = " "
 
 -- faster inline nav
-noremap_s("W", "5w")
-noremap_s("B", "5b")
+utils.noremap_s("W", "5w")
+utils.noremap_s("B", "5b")
 
+-- close, window if there's a spit, the buffer if not
+vim.keymap.set("n", "<leader>x", function()
+	local windows = utils.getWindowCount()
+	if windows > 1 then
+		-- Close the current window
+		vim.cmd("close")
+	else
+		-- Close the current buffer
+		vim.cmd("bd")
+	end
+end)
+-- force version of the above
+vim.keymap.set("n", "<leader>X", function()
+	local windows = utils.getWindowCount()
+	if windows > 1 then
+		-- Close the current window
+		vim.cmd("close")
+	else
+		-- force close the current buffer
+		vim.cmd("bd!")
+	end
+end)
+
+-- swap windows
+vim.keymap.set("n", "<leader>ws", "<C-w>x")
+-- rotate windows
+vim.keymap.set("n", "<leader>wr", "<C-w>r")
 --  new window vertical
-vim.keymap.set("n", "<leader>wv", "<cmd>vsplit<CR>")
+vim.keymap.set("n", "<leader>w|", "<cmd>vsplit<CR>")
 --  new window horizontal
-vim.keymap.set("n", "<leader>wh", "<cmd>split<CR>")
+vim.keymap.set("n", "<leader>w-", "<cmd>split<CR>")
 -- close current window
-vim.keymap.set("n", "<leader>wc", "<cmd>close<CR>")
+vim.keymap.set("n", "<leader>wx", "<cmd>close<CR>")
 -- cycle through windows with tab
-vim.keymap.set("n", "<TAB>", "<C-w>w")
+vim.keymap.set("n", "<TAB>", "<C-w>w", { noremap = true })
+-- cycle through windows backwards with shift tab
+vim.keymap.set("n", "<S-TAB>", "<C-w>W", { noremap = true })
+-- active window only (close all other panes)
+vim.keymap.set("n", "<leader>wo", "<cmd>only<CR>")
+-- window =, equalize window sizes
+vim.keymap.set("n", "<leader>w=", "<C-w>=")
+-- maximize/"zoom" window
+vim.keymap.set("n", "<leader>wz", "<C-w>|<C-w>_")
+-- arrow keys to resize windows in normal mode
+-- ensure we aren't in netrw, mason, or neo tree
+function Remap_arrows()
+	if vim.bo.filetype ~= "netrw" and vim.bo.filetype ~= "mason" and vim.bo.filetype ~= "neo-tree" then
+		vim.keymap.set("n", "<Up>", ":resize -1<CR>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<Down>", ":resize +1<CR>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<Left>", ":vertical resize -3<CR>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<Right>", ":vertical resize +3<CR>", { noremap = true, silent = true })
+	else
+		vim.keymap.set("n", "<Up>", "<Up>", { silent = true })
+		vim.keymap.set("n", "<Down>", "<Down>", { silent = true })
+		vim.keymap.set("n", "<Left>", "<Left>", { silent = true })
+		vim.keymap.set("n", "<Right>", "<Right>", { silent = true })
+	end
+end
+
+Remap_arrows()
+vim.cmd([[
+	augroup ArrowMap
+		autocmd!
+		autocmd FileType,BufRead * lua Remap_arrows()
+	augroup END
+]])
 
 -- Change ~ to ` for flipping case its just faster
-noremap_s("`", "~")
+utils.noremap_s("`", "~")
 
 -- : to ;
-vim.keymap.set({ "n", "v" }, ';', ':')
+vim.keymap.set({ "n", "v" }, ";", ":", { noremap = true })
 
 -- file exp, "Project View"
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", "<cmd>Oil<CR>")
+-- file exp, "Project Tree"
+vim.keymap.set("n", "<leader>pt", "<cmd>Neotree<CR>")
 
--- delete highlighted word and past over from buffer
+-- C-\ is good enough for terminal normal mode
+vim.keymap.set("t", "<C-\\>", "<C-\\><C-n>")
+
+-- paste over visual selection from buffer
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- yank to system clipboard
@@ -50,10 +113,16 @@ vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format)
 vim.keymap.set({ "n", "v" }, "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<ESC><cmd>w<CR>a")
 
--- chmod file "file x"
+-- chmod file "file x-cutable"
 vim.keymap.set("n", "<leader>fx", "<cmd>!chmod +x %<CR>")
 
 -- F5 to reload the keymap
-vim.keymap.set("n", '<F5>', ':luafile ~/.config/nvim/init.lua<CR>')
+vim.keymap.set("n", "<F5>", ":luafile ~/.config/nvim/init.lua<CR>")
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/daneski13/packer.lua<CR>");
+-- "view list" toggle
+vim.keymap.set("n", "<leader>vl", "<cmd>set list!<CR>")
+
+-- open package manager "vim package manager"
+vim.keymap.set("n", "<leader>vpm", "<cmd>e ~/.config/nvim/lua/daneski13/packer.lua<CR>")
+-- "vim package update"
+vim.keymap.set("n", "<leader>vpu", "<cmd>PackerUpdate<CR>")

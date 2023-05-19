@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+# prints the leaf process of a tmux window to
+# stdout given the tmux pane pid
+
+import psutil
+import sys
+import os
+
+
+def glyphize(process_name: str) -> str:
+    """ Glyphs for common processes """
+
+    glyph: str = ""
+    SHELLS = ["zsh", "bash", "fish"]
+    if process_name == "gh":
+        glyph = ""
+    if process_name == ("node"):
+        glyph = ""
+    elif process_name.startswith("python"):
+        glyph = ""
+    elif process_name == "nvim" or process_name == "vim":
+        glyph = ""
+    elif process_name == "emacs":
+        glyph = ""
+    elif process_name == "ruby":
+        glyph = ""
+    elif process_name == "java":
+        glyph = ""
+    elif process_name in ["rust", "rustc", "cargo"]:
+        glyph = ""
+    elif process_name in SHELLS:
+        glyph = ""
+
+    return glyph + " " + process_name
+
+
+# Grab the pane's process id
+process = psutil.Process(int(sys.argv[1]))
+editor = os.environ.get('EDITOR')
+
+# Get the leaf processes of the window
+while True:
+    num_children = len(process.children())
+    # May seem odd that a process with more than 1 children is considered a leaf,
+    # but this is because you probably actually want the the lowest "root" process.
+    # ex. neovim with a bunch of plugins will probably have python, node and LSP instances,
+    # but you probably only care about the neovim process.
+    if num_children == 0 or num_children > 1 or process.name() == editor:
+        # found the process, stdout and exit
+        print(glyphize(process.name()))
+        exit(0)
+    else:
+        process = process.children()[0]

@@ -4,7 +4,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # .local custom scripts
@@ -16,10 +16,16 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 # Spicetify
-export SPICETIFY_INSTALL="~/spicetify-cli"
+export SPICETIFY_INSTALL="$HOME/spicetify-cli"
 if [[ ":$PATH:" != *":$SPICETIFY_INSTALL:"* ]]; then
     export PATH="$SPICETIFY_INSTALL:$PATH"
 fi
+
+# alias to better programs
+alias vim='nvim'
+alias npm='pnpm'
+# silence you-should-use
+export YSU_IGNORED_ALIASES=("vim" "npm")
 
 # Projects folder
 export PROJECTS=~/Desktop/Projects
@@ -53,20 +59,20 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Oh My Zsh Plugins
 plugins=(
-	autojump
-	bundler
-	gh
-	dotenv
-	macOS
-	rust
-	sudo
-	web-search
-	copypath
-	copyfile
-	jsontools
-	you-should-use
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+    autojump
+    bundler
+    gh
+    dotenv
+    macOS
+    rust
+    sudo
+    web-search
+    copypath
+    copyfile
+    jsontools
+    you-should-use
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -85,13 +91,13 @@ eval $(thefuck --alias)
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/dane/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-	eval "$__conda_setup"
+    eval "$__conda_setup"
 else
-	if [ -f "/Users/dane/miniconda3/etc/profile.d/conda.sh" ]; then
-		. "/Users/dane/miniconda3/etc/profile.d/conda.sh"
-	else
-		export PATH="/Users/dane/miniconda3/bin:$PATH"
-	fi
+    if [ -f "/Users/dane/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/dane/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/dane/miniconda3/bin:$PATH"
+    fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
@@ -101,8 +107,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # pnpm
 export PNPM_HOME="~/.local/share/pnpm"
 case ":$PATH:" in
-	*":$PNPM_HOME:"*) ;;
-	*) export PATH="$PNPM_HOME:$PATH" ;;
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 

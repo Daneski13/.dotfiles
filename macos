@@ -2,44 +2,54 @@
 
 # Check if Homebrew is installed and install stow
 if ! command -v brew &>/dev/null; then
-	echo "Homebrew is not installed. Installing Homebrew and stow..."
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	zsh exec
-	brew install stow
-	zsh exec
+    echo "Homebrew is not installed. Installing Homebrew and stow..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    zsh exec
+    brew install stow
+    zsh exec
 fi
 
 # Stow
 if [[ -z $STOW_FOLDERS ]]; then
-	STOW_FOLDERS="bin,nvim,zsh,flavours,wezterm,tmux"
+    STOW_FOLDERS="bin,nvim,zsh,flavours,wezterm,tmux"
 fi
 
 if [[ -z $DOTFILES ]]; then
-	DOTFILES=$HOME/.dotfiles
+    DOTFILES=$HOME/.dotfiles
 fi
 
 STOW_FOLDERS=$STOW_FOLDERS DOTFILES=$DOTFILES $DOTFILES/install
 
 # Install other packages with Homebrew if they are not installed
 if ! command -v nvim &>/dev/null; then
-	echo "Installing Stuff... (This may take a while)"
-	echo "Password may be necessary"
-	# taps
-	brew tap jakehilborn/jakehilborn
-	brew tap oven-sh/bun
-	# Install packages
-	brew install git bat neovim ncurses displayplacer flavours automake autojump cmake ffmpeg fd gh spicetify/homebrew-tap/spicetify-cli node bun python swiftlint thefuck tree wget yarn ripgrep upx mint guile n pnpm diff-so-fancy fzf fzy luarocks
+    echo "Installing Stuff... (This may take a while)"
+    echo "Password may be necessary"
+    # taps
+    brew tap jakehilborn/jakehilborn
+    brew tap oven-sh/bun
+    # Install packages
+    brew install git git-delta pstree bat neovim ncurses displayplacer flavours automake autojump cmake ffmpeg fd gh spicetify/homebrew-tap/spicetify-cli node bun python swiftlint thefuck tree wget yarn ripgrep upx mint guile n pnpm fzf fzy luarocks
 
-	# Git settings
-	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX | bat"
-	git config --global interactive.diffFilter "diff-so-fancy --patch"
-	git config --global core.editor nvim
+    # === Git settings ===
+    # Delta
+    git config --global core.pager "delta"
+    git config --global interactive.diffFilter "delta --color-only"
+    git config --global delta.navigate true
+    git config --global delta.light false
+    git config --global delta.line-numbers true
+    git config --global delta.true-color auto
+    git config --global delta.syntax-theme TwoDark
+    git config --global merge.conflictstyle diff3
+    git config --global diff.colorMoved default
 
-	echo "Installing Casks..."
-	# Install Casks
-	brew install --cask alt-tab appcleaner brave-browser chatgpt cheatsheet chromedriver discord docker eqmax fig figma github google-chrome gpg-suite hiddenbar lulu maccy mactex microsoft-edge monitorcontrol spotify stats visual-studio-code wezterm xcodes
+    # nvim as editor
+    git config --global core.editor nvim
 
-	# Install Conda
-	# TODO: doesn't work
-	# wget -qO- https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh | bash
+    hcho "Installing Casks..."
+    # === Install Casks ===
+    brew install --cask alt-tab appcleaner brave-browser chatgpt cheatsheet chromedriver discord docker eqmax fig figma github google-chrome gpg-suite hiddenbar lulu maccy mactex microsoft-edge monitorcontrol spotify stats visual-studio-code wezterm xcodes
+
+    # Install Conda
+    # TODO: doesn't work
+    # wget -qO- https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh | bash
 fi

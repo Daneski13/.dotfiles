@@ -13,7 +13,6 @@ vim.opt.relativenumber = true
 -- 4 space indenting
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = false
 -- auto indenting
 vim.opt.smartindent = true
 
@@ -26,6 +25,16 @@ vim.opt.incsearch = true
 
 -- colors
 vim.opt.termguicolors = true
+
+-- set list
+vim.opt.listchars = {
+	tab = " ",
+	trail = "·",
+	space = "·",
+	eol = "↲",
+	extends = "❯",
+	precedes = "❮",
+}
 
 -- always have at least 8 from bottom of screen
 vim.opt.scrolloff = 8

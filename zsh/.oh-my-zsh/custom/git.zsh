@@ -4,7 +4,7 @@
 __git-root-dir() {
     local root=$(git rev-parse --show-toplevel 2> /dev/null)
     if [ -n "$root" ]; then
-        pushd "$root" > /dev/null
+        pushd "$root" > /dev/null 2>&1
     else
         echo "Not a git repo"
     fi
@@ -37,7 +37,7 @@ function gaf() {
             git add "$file"
         done
     fi
-    popd > /dev/null
+    popd > /dev/null 2>&1
 }
 
 # Commit
@@ -68,7 +68,7 @@ function grmf() {
             git rm "./$file"
         done
     fi
-    popd > /dev/null
+    popd > /dev/null 2>&1
 }
 # Remove from staged
 alias grms="git restore --staged"
@@ -76,7 +76,7 @@ alias grms="git restore --staged"
 function grmsa() {
     __git-root-dir
     git restore --staged .
-    popd > /dev/null
+    popd > /dev/null 2>&1
 }
 # Remove from staged fuzzy
 function grmsf() {
@@ -88,7 +88,7 @@ function grmsf() {
             git restore --staged "$file"
         done
     fi
-    popd > /dev/null
+    popd > /dev/null 2>&1
 }
 
 # Restore
@@ -107,7 +107,7 @@ function grsf() {
             git restore "$file"
         done
     fi
-    popd > /dev/null
+    popd > /dev/null 2>&1
 }
 
 # Reset

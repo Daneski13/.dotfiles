@@ -4,50 +4,70 @@
 
 import psutil
 import sys
-import os
+
+
+# The maximum depth to search for a leaf process
+MAX_DEPTH = 2
 
 
 def glyphize(process_name: str) -> str:
     """ Glyphs for common processes """
+    glyph: str | None = None
 
-    glyph: str = ""
-    SHELLS = ["zsh", "bash", "fish"]
-    if process_name == "gh":
-        glyph = ""
-    if process_name == ("node"):
-        glyph = ""
-    elif process_name.startswith("python"):
-        glyph = ""
-    elif process_name == "nvim" or process_name == "vim":
+    # Shells
+    SHELLS = ["sh", "zsh", "bash", "fish", "csh", "tcsh", "ksh", "dash"]
+    if process_name in SHELLS:
+        glyph = ""
+
+    # Editors
+    elif process_name == "vim" or process_name == "nvim":
         glyph = ""
     elif process_name == "emacs":
         glyph = ""
+
+    # Language runtimes
+    elif process_name.startswith("python"):
+        glyph = ""
+    elif process_name == "node":
+        glyph = ""
     elif process_name == "ruby":
         glyph = ""
     elif process_name == "java":
         glyph = ""
-    elif process_name in ["rust", "rustc", "cargo"]:
+    elif process_name in ["rust", "cargo", "rustc"]:
         glyph = ""
-    elif process_name in SHELLS:
-        glyph = ""
 
-    return glyph + " " + process_name
+    # Git
+    elif process_name == "gh" or process_name.startswith("git"):
+        glyph = ""
+
+    # Less / pager
+    elif process_name == "less":
+        glyph = "󰗚"
+
+    # Docker
+    elif process_name == "docker":
+        glyph = "󰡨"
+
+    # Pad the glpyh with a space if it exists
+    glyph = f"{glyph} " if glyph else ""
+
+    return f"{glyph}{process_name}"
 
 
-# Grab the pane's process id
+# Get the process
 process = psutil.Process(int(sys.argv[1]))
-editor = os.environ.get('EDITOR')
 
-# Get the leaf processes of the window
-while True:
+for _ in range(MAX_DEPTH):
     num_children = len(process.children())
     # May seem odd that a process with more than 1 children is considered a leaf,
     # but this is because you probably actually want the the lowest "root" process.
-    # ex. neovim with a bunch of plugins will probably have python, node and LSP instances,
+    # ex. neovim with a bunch of plugins will probably have severa child processes
     # but you probably only care about the neovim process.
-    if num_children == 0 or num_children > 1 or process.name() == editor:
-        # found the process, stdout and exit
-        print(glyphize(process.name()))
-        exit(0)
+    if num_children == 0 or num_children > 1:
+        break
     else:
         process = process.children()[0]
+
+name = process.name()
+print(glyphize(name))

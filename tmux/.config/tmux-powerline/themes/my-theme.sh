@@ -46,7 +46,7 @@ fi
 
 if [ -z $TMUX_POWERLINE_WINDOW_STATUS_FORMAT ]; then
     TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-        "#[bg=colour235,fg=white]"
+        "#[bg=#888888,fg=white]"
         "  #I#{?window_flags, , } "
         "$TMUX_POWERLINE_SEPARATOR_RIGHT_THIN"
         " #W "

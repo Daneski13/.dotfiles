@@ -1,13 +1,34 @@
-require("daneski13.colemak")
 local utils = require("daneski13.utils")
 
+COLEMAK = true
+if COLEMAK then
+	require("daneski13.colemak")
+end
 -- ======== Mappings ========
 -- Leader key
 vim.g.mapleader = " "
 
--- faster inline nav
-utils.noremap_s("W", "5w")
-utils.noremap_s("B", "5b")
+
+if not COLEMAK then
+	-- window nav using bindngs
+	utils.noremap_s("<leader>wh", "<C-w>h")
+	utils.noremap_s("<leader>wj", "<C-w>j")
+	utils.noremap_s("<leader>wk", "<C-w>k")
+	utils.noremap_s("<leader>wl", "<C-w>l")
+
+	-- faster up/down nav
+	utils.noremap_s("K", "5kzz")
+	utils.noremap_s("J", "5jzz")
+	-- start line
+	utils.noremap_s("H", "0")
+	-- end line
+	utils.noremap_s("L", "$")
+
+	-- Moves the selected line down one
+	vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+	-- Moves the selected line up one
+	vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+end
 
 -- close, window if there's a spit, the buffer if not
 vim.keymap.set("n", "<leader>x", function()
@@ -78,9 +99,6 @@ vim.cmd([[
 
 -- Change ~ to ` for flipping case its just faster
 utils.noremap_s("`", "~")
-
--- : to ;
-vim.keymap.set({ "n", "v" }, ";", ":", { noremap = true })
 
 -- file exp, "Project View"
 vim.keymap.set("n", "<leader>pv", "<cmd>Oil<CR>")

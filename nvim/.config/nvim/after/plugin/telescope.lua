@@ -2,7 +2,7 @@ if vim.g.vscode then return end
 
 -- rooter setup
 vim.g.rooter_patterns = { '.git', 'package.json', 'Cargo.toml', 'go.mod' }
-vim.g.rooter_manual_only = 1
+-- vim.g.rooter_manual_only = 1
 local rooter = vim.fn.FindRootDirectory()
 
 local actions = require('telescope.actions')
@@ -21,6 +21,8 @@ require('telescope').setup({
 
 -- load fzf extension
 require('telescope').load_extension('fzf')
+-- load ui select
+require("telescope").load_extension("ui-select")
 
 -- === Mappings ===
 local builtin = require("telescope.builtin")

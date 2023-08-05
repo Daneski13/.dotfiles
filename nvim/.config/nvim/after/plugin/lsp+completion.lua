@@ -7,7 +7,7 @@ end
 -- neodev
 require("neodev").setup({})
 
--- LSP
+-- LSP zero
 local lsp = require("lsp-zero")
 lsp.preset({})
 
@@ -40,8 +40,8 @@ require("copilot").setup({
 	copilot_node_command = "node", -- Node.js version must be > 16.x
 })
 
+-- === CMP ===
 local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_a
 require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
 	-- mappings
@@ -79,6 +79,9 @@ cmp.setup({
 				cmp.close()
 			end
 		end),
+		-- Scroll Complete Menu
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
 	},
 
 	-- snippet
@@ -105,7 +108,6 @@ lsp.on_attach(function(_, bufnr)
 	-- format on save
 	lsp.buffer_autoformat()
 
-	-- prefixed with leader+l ("lang"/"lsp") for lsp related commands
 	-- go to definition, declaration, implementation, references
 	vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, opts)
 	vim.keymap.set("n", "<leader>gD", function()

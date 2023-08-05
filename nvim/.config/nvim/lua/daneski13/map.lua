@@ -117,6 +117,9 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 -- delete to void buffer
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
+-- Why would I ever want a single char deleted with x to be in my default register?
+vim.keymap.set("n", "x", '"_x')
+
 -- Half a page down/up and center
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

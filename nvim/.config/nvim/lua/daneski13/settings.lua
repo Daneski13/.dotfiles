@@ -39,6 +39,9 @@ vim.opt.listchars = {
 -- always have at least 8 from bottom of screen
 vim.opt.scrolloff = 8
 
+-- change updatetime for cursorhold
+vim.opt.updatetime = 1000
+
 -- always show sign col
 vim.opt.signcolumn = "yes"
 

@@ -6,7 +6,7 @@ local config = {}
 config = wezterm.config_builder()
 
 -- Config
-config.font = wezterm.font("Fira Code")
+config.font = wezterm.font("FiraCode Nerd Font")
 config.enable_scroll_bar = true
 config.font_size = 15
 

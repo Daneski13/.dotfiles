@@ -27,6 +27,9 @@ alias npm='pnpm'
 # silence you-should-use
 export YSU_IGNORED_ALIASES=("vim" "npm")
 
+# 64 bit intel/amd and arm always
+export ARCHFLAGS="-arch x86_64 -arch arm64"
+
 # Projects folder
 export PROJECTS=~/Desktop/Projects
 # flavours directories
@@ -105,7 +108,7 @@ unset __conda_setup
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # pnpm
-export PNPM_HOME="~/.local/share/pnpm"
+export PNPM_HOME="${HOME}/.local/share/pnpm"
 case ":$PATH:" in
     *":$PNPM_HOME:"*) ;;
     *) export PATH="$PNPM_HOME:$PATH" ;;

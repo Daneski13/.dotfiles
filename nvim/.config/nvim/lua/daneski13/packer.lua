@@ -24,13 +24,17 @@ require("packer").startup(function(use)
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		-- or                            , branch = '0.1.x',
+
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
-			use({
+			-- use lua fzf
+			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				run =
 				"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-			}),
+			},
+			-- replace some core stuff with telescope
+			{ 'nvim-telescope/telescope-ui-select.nvim' }
 		},
 	})
 
@@ -68,6 +72,7 @@ require("packer").startup(function(use)
 	use("windwp/nvim-autopairs")
 	-- souround stuff with parrns, brackets, etc
 	use("machakann/vim-sandwich")
+	use("tpope/vim-surround")
 
 	-- multiline edit
 	use("mg979/vim-visual-multi")
@@ -151,6 +156,9 @@ require("packer").startup(function(use)
 			-- Formatting stuff
 			{ "jose-elias-alvarez/null-ls.nvim" },
 			{ "jay-babu/mason-null-ls.nvim" },
+
+			-- code actions lightbulb
+			{ "kosayoda/nvim-lightbulb" },
 		},
 	})
 	--  proper completion for neovim lua

@@ -43,6 +43,20 @@ M.theme = function()
 	}
 end
 
+-- Code actions lightbulb
+require('nvim-lightbulb').setup({
+	status_text = {
+		enabled = true,
+	},
+	autocmd = {
+		enabled = true
+	}
+})
+local function code_action_lightbulb()
+	local lightbulb = require('nvim-lightbulb').get_status_text()
+	return lightbulb
+end
+
 require('lualine').setup {
 	options = {
 		theme = M.theme(),
@@ -63,7 +77,7 @@ require('lualine').setup {
 	},
 	sections = {
 		lualine_a = { 'mode' },
-		lualine_b = { 'branch', 'diff', 'diagnostics' },
+		lualine_b = { 'branch', 'diff', 'diagnostics', code_action_lightbulb },
 		lualine_c = { 'filename' },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },

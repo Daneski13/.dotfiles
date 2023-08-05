@@ -2,7 +2,7 @@
 file = "~/.config/iTerm2/colors.itermcolors"
 template = "iterm2"
 rewrite = true
-hook = "python3 ~/.local/scripts/iterm2Color.py"
+hook = "iterm2Color"
 
 [[item]]
 file = "~/.config/spicetify/Themes/Wallpaper/color.ini"

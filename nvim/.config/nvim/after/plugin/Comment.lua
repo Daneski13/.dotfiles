@@ -13,9 +13,15 @@ vim.keymap.set({ "n", "i" }, "÷", function()
 	end
 end)
 vim.keymap.set("v", "÷", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
+vim.keymap.set("v", "<M-/>", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
 
 -- Toggle block comment, Opt/Alt + .
 vim.keymap.set({ "n", "i" }, "≥", function()
 	require("Comment.api").toggle.blockwise.current()
 end)
 vim.keymap.set("v", "≥", "<ESC><cmd>lua require('Comment.api').toggle.blockwise(vim.fn.visualmode())<CR>")
+
+vim.keymap.set({ "n", "i" }, "<M->>", function()
+	require("Comment.api").toggle.blockwise.current()
+end)
+vim.keymap.set("v", "<M->>", "<ESC><cmd>lua require('Comment.api').toggle.blockwise(vim.fn.visualmode())<CR>")

@@ -146,14 +146,14 @@ alias gt="git tag -s"
 # Tag list
 alias gtl="git tag | sort -V"
 
-# Auto fetch git repos on dir change
-autoload -Uz add-zsh-hook
-function _fetch() {
-    if [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]; then
-        git fetch --quiet
-    fi
-}
-add-zsh-hook chpwd _fetch
+# # Auto fetch git repos on dir change
+# autoload -Uz add-zsh-hook
+# function _fetch() {
+#     if [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]; then
+#         git fetch --quiet
+#     fi
+# }
+# add-zsh-hook chpwd _fetch
 
 # Interactive rebase the last given number of commits
 function g-rebase() {
@@ -161,7 +161,7 @@ function g-rebase() {
 }
 
 # squash a all commits
-function g-squash-a() {
+function g-squash-all() {
     # get the first commit
     local first_commit=$(git rev-list --max-parents=0 HEAD)
 

@@ -19,6 +19,13 @@ require("packer").startup(function(use)
 	-- Packer itself
 	use("wbthomason/packer.nvim")
 
+	-- distant (ssh editing)
+	use {
+		'chipsenkbeil/distant.nvim',
+		branch = 'v0.3',
+	}
+
+
 	-- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",

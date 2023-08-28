@@ -46,7 +46,7 @@ function wallpaper() {
     flavours generate dark $1
     flavours apply "generated"
 
-    # Spicetify (hook isn't working)
+    # Spicetify (a hook via flavours isn't working)
     echo "Spicing Spotify..."
     spicetify-wallpaper 1> /dev/null
 }

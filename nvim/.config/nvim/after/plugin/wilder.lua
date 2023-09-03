@@ -11,7 +11,7 @@ local popup = wilder.popupmenu_renderer(
 				{ { a = 1 }, { a = 1 }, { foreground = '#f4468f' } }),
 		},
 		border = 'rounded',
-		-- Transparancy
+		-- Transparency
 		pumblend = 20,
 		-- highlights
 		highlighter = {

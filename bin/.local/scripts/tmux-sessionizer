@@ -3,6 +3,7 @@
 
 # starts a tmux session at the specified dir or fuzzy find a dir to start a session in
 # if a session already exists, switch to it
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else

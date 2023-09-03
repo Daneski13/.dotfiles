@@ -65,14 +65,14 @@ function grmf() {
     if [ -n "$selected" ]; then
         # loop through selected files and remove
         for file in $selected; do
-            git rm "./$file"
+            git rm $1 "./$file"
         done
     fi
     popd > /dev/null 2>&1
 }
 # Remove from staged
 alias grms="git restore --staged"
-# Remove all from staged
+# Remove all from staged "git rm staged all"
 function grmsa() {
     __git-root-dir
     git restore --staged .
@@ -146,14 +146,14 @@ alias gt="git tag -s"
 # Tag list
 alias gtl="git tag | sort -V"
 
-# # Auto fetch git repos on dir change
+# Auto fetch git repos
 # autoload -Uz add-zsh-hook
 # function _fetch() {
 #     if [ -n "$(git rev-parse --git-dir 2>/dev/null)" ]; then
 #         git fetch --quiet
 #     fi
 # }
-# add-zsh-hook chpwd _fetch
+# add-zsh-hook precmd _fetch
 
 # Interactive rebase the last given number of commits
 function g-rebase() {

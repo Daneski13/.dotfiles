@@ -76,7 +76,7 @@ vim.keymap.set("n", "<leader>wz", "<C-w>|<C-w>_")
 -- arrow keys to resize windows in normal mode
 -- ensure we aren't in netrw, mason, or neo tree
 function Remap_arrows()
-	if vim.bo.filetype ~= "netrw" and vim.bo.filetype ~= "mason" and vim.bo.filetype ~= "neo-tree" then
+	if vim.bo.filetype ~= "netrw" and vim.bo.filetype ~= "mason" and vim.bo.filetype ~= "neo-tree" and vim.bo.filetype ~= "lazy" then
 		vim.keymap.set("n", "<Up>", ":resize -1<CR>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<Down>", ":resize +1<CR>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<Left>", ":vertical resize -3<CR>", { noremap = true, silent = true })
@@ -144,6 +144,4 @@ vim.keymap.set("n", "<F5>", ":luafile ~/.config/nvim/init.lua<CR>")
 vim.keymap.set("n", "<leader>vl", "<cmd>set list!<CR>")
 
 -- open package manager "vim package manager"
-vim.keymap.set("n", "<leader>vpm", "<cmd>e ~/.config/nvim/lua/daneski13/packer.lua<CR>")
--- "vim package update"
-vim.keymap.set("n", "<leader>vpu", "<cmd>PackerUpdate<CR>")
+vim.keymap.set("n", "<leader>vpm", "<cmd>e ~/.config/nvim/lua/daneski13/lazy.lua<CR>")

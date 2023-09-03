@@ -4,3 +4,4 @@ personal.zsh
 .vscode/
 tmux/.tmux/plugins/*
 !tmux/.tmux/plugins/tpm
+lazy-lock.json

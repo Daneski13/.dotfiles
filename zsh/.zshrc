@@ -24,8 +24,9 @@ fi
 # alias to better programs
 alias vim='nvim'
 alias npm='pnpm'
+alias ls='exa'
 # silence you-should-use
-export YSU_IGNORED_ALIASES=("vim" "npm")
+export YSU_IGNORED_ALIASES=("vim" "npm" "ls")
 
 # 64 bit intel/amd and arm always
 export ARCHFLAGS="-arch x86_64 -arch arm64"
@@ -60,27 +61,46 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Oh My Zsh Plugins
-plugins=(
-    autojump
-    bundler
-    gh
-    dotenv
-    macOS
-    rust
-    sudo
-    web-search
-    copypath
-    copyfile
-    jsontools
-    you-should-use
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)
-source $ZSH/oh-my-zsh.sh
+# Oh my ZSH
+source "$ZSH/oh-my-zsh.sh"
+
+# Plugins
+# If on macOS, use homebrew zplug
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export ZPLUG_HOME=/opt/homebrew/opt/zplug
+else
+    export ZPLUG_HOME=~/.zplug
+fi
+source "$ZPLUG_HOME/init.zsh"
+
+zplug "plugins/autojump", from:oh-my-zsh
+zplug "plugins/gh", from:oh-my-zsh
+zplug "plugins/dotenv", from:oh-my-zsh
+zplug "plugins/sudo", from:oh-my-zsh
+zplug "plugins/web-search", from:oh-my-zsh
+zplug "plugins/copypath", from:oh-my-zsh
+zplug "plugins/copyfile", from:oh-my-zsh
+zplug "plugins/jsontools", from:oh-my-zsh
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    zplug "plugins/macos", from:oh-my-zsh
+fi
+
+zplug "MichaelAquilina/zsh-you-should-use"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
+
 
 # The Fuck
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"

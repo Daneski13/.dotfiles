@@ -1,145 +1,136 @@
--- ====== PACKER ======
--- Just in case, make sure the packpath is set properly
-vim.cmd([[set packpath+=~/.local/share/nvim/site/pack/*/start]])
-
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+-- ====== Lazy ======
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-require("packer").startup(function(use)
-	-- Packer itself
-	use("wbthomason/packer.nvim")
-
+local plugins = {
 	-- distant (ssh editing)
-	use {
+	{
 		'chipsenkbeil/distant.nvim',
 		branch = 'v0.3',
-	}
-
+	},
 
 	-- Telescope
-	use({
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build =
+		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+	},
+	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		-- or                            , branch = '0.1.x',
 
-		requires = {
+		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			-- use lua fzf
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				run =
-				"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-			},
 			-- replace some core stuff with telescope
 			{ 'nvim-telescope/telescope-ui-select.nvim' }
 		},
-	})
+	},
 
 	-- buffer edit file system (replace netrw)
-	use({ "stevearc/oil.nvim" })
-	-- but sometimes I want a file tree explorer
-	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-	use({
+	{ "stevearc/oil.nvim" },
+	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
-		requires = {
+		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
-	})
+	},
 
 	-- Color scheme
-	use("olimorris/onedarkpro.nvim")
+	"olimorris/onedarkpro.nvim",
 
 	-- Treesitter
-	use({
+	{
 		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-		requires = {
+		build = ":TSUpdate",
+		dependencies = {
 			{ "nvim-treesitter/playground" },
 			{ "nvim-treesitter/nvim-treesitter-context" },
 		},
-	})
+	},
 	-- rainbow parens
-	use("HiPhish/nvim-ts-rainbow2")
-	--  auto tag
-	use("windwp/nvim-ts-autotag")
+	"HiPhish/nvim-ts-rainbow2",
+	-- auto tag
+	"windwp/nvim-ts-autotag",
 	-- auto pairs
-	use("windwp/nvim-autopairs")
+	"windwp/nvim-autopairs",
 	-- souround stuff with parrns, brackets, etc
-	use("machakann/vim-sandwich")
-	use("tpope/vim-surround")
+	"machakann/vim-sandwich",
+	"tpope/vim-surround",
 
 	-- multiline edit
-	use("mg979/vim-visual-multi")
+	"mg979/vim-visual-multi",
 
 	-- Game to git good
-	use("theprimeagen/vim-be-good")
+	"theprimeagen/vim-be-good",
 
 	-- harpoon
-	use("theprimeagen/harpoon")
+	"theprimeagen/harpoon",
 
 	-- undo tree
-	use("mbbill/undotree")
+	"mbbill/undotree",
 
 	-- git integration
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
-	use("lewis6991/gitsigns.nvim")
+	"tpope/vim-fugitive",
+	"tpope/vim-rhubarb",
+	"lewis6991/gitsigns.nvim",
 
 	-- automagic tab width/space width for project
-	use("tpope/vim-sleuth")
+	"tpope/vim-sleuth",
 
 	-- commenting
-	use({ "numToStr/Comment.nvim" })
+	{ "numToStr/Comment.nvim" },
 
 	-- startup dashboard
-	use({
+	{
 		"goolord/alpha-nvim",
-		requires = { "nvim-tree/nvim-web-devicons" },
-	})
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 
 	-- status line
-	use({
+	{
 		"nvim-lualine/lualine.nvim",
-		requires = { "nvim-tree/nvim-web-devicons", opt = true },
-	})
+		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+	},
 
 	-- project root
-	use({ "airblade/vim-rooter" })
+	{ "airblade/vim-rooter" },
 
 	-- markdown preview
-	use({
+	{
 		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		setup = function()
+		build = "cd app && npm install",
+		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
-	})
+	},
 
 	-- LSP/Completion
-	use({
+	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v2.x",
-		requires = {
+		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
 			{
 				-- Optional
 				"williamboman/mason.nvim",
-				run = function()
+				build = function()
 					pcall(vim.cmd, "MasonUpdate")
 				end,
 			},
@@ -167,34 +158,34 @@ require("packer").startup(function(use)
 			-- code actions lightbulb
 			{ "kosayoda/nvim-lightbulb" },
 		},
-	})
+	},
 	--  proper completion for neovim lua
-	use({
+	{
 		"folke/lua-dev.nvim",
-		requires = {
+		dependencies = {
 			{ "neovim/nvim-lspconfig" },
 		},
-	})
+	},
 	-- LSP progress
-	use({
+	{
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup({})
 		end,
-	})
+	},
 	-- Completion in vim cmd
-	use({
+	{
 		"gelguy/wilder.nvim",
 		build = ":UpdateRemotePlugins",
-		requires = {
+		dependencies = {
 			{ "romgrk/fzy-lua-native" },
 			{ "roxma/nvim-yarp" },
 		},
-	})
+	},
+}
+-- Sometimes I want a file tree explorer
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
+local opts = {}
+
+require("lazy").setup(plugins, opts)

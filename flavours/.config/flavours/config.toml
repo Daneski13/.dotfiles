@@ -16,3 +16,8 @@ template = "wezterm"
 rewrite = true
 # Wezterm will automatically reload the config when it changes, so this is a kinda hacky way to make it reload
 hook = "nvim -c '%s/Generated/Generated/g' -c 'wq' ~/.wezterm.lua"
+
+[[item]]
+file = "~/.tmux/tmux-styler/config.py"
+template = "tmux-styler"
+rewrite = true

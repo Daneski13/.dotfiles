@@ -21,3 +21,5 @@ hook = "nvim -c '%s/Generated/Generated/g' -c 'wq' ~/.wezterm.lua"
 file = "~/.tmux/tmux-styler/config.py"
 template = "tmux-styler"
 rewrite = true
+# Reload tmux config
+hook = "tmux source-file ~/.tmux.conf"

@@ -37,10 +37,6 @@ utils.noremap_s("J", "I")
 -- faster up/down nav, center
 utils.noremap_s("E", "5kzz")
 utils.noremap_s("N", "5jzz")
--- start line
-utils.noremap_s("M", "0")
--- end line
-utils.noremap_s("I", "$")
 
 -- Moves the selected line down one
 vim.keymap.set("v", "N", ":m '>+1<CR>gv=gv")

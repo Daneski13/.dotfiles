@@ -8,6 +8,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
 	FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+	export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 	# Setting PATH for Python 3.10
 	# The original version is saved in .zprofile.pysave
 	PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"

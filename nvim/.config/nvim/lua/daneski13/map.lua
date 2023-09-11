@@ -19,10 +19,6 @@ if not COLEMAK then
 	-- faster up/down nav
 	utils.noremap_s("K", "5kzz")
 	utils.noremap_s("J", "5jzz")
-	-- start line
-	utils.noremap_s("H", "0")
-	-- end line
-	utils.noremap_s("L", "$")
 
 	-- Moves the selected line down one
 	vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

@@ -89,6 +89,9 @@ local plugins = {
 	"tpope/vim-rhubarb",
 	"lewis6991/gitsigns.nvim",
 
+	-- diagnostics
+	"folke/trouble.nvim",
+
 	-- automagic tab width/space width for project
 	"tpope/vim-sleuth",
 

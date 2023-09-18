@@ -21,13 +21,6 @@ if [[ ":$PATH:" != *":$SPICETIFY_INSTALL:"* ]]; then
     export PATH="$SPICETIFY_INSTALL:$PATH"
 fi
 
-# alias to better programs
-alias vim='nvim'
-alias npm='pnpm'
-alias ls='exa'
-# silence you-should-use
-export YSU_IGNORED_ALIASES=("vim" "npm" "ls")
-
 # 64 bit intel/amd and arm always
 export ARCHFLAGS="-arch x86_64 -arch arm64"
 
@@ -101,6 +94,14 @@ zplug load
 
 # The Fuck
 eval "$(thefuck --alias)"
+
+# alias to better programs
+alias vim='nvim'
+alias npm='pnpm'
+alias ls='eza -a --icons --group-directories-first'
+alias cat='bat'
+# silence you-should-use
+export YSU_IGNORED_ALIASES=("vim" "npm" "ls" "cat")
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"

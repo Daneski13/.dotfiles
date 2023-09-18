@@ -29,4 +29,12 @@ config.hide_tab_bar_if_only_one_tab = true
 config.color_scheme_dirs = { '~/.config/werterm/colors' }
 config.color_scheme = "Generated"
 
+-- Keys
+config.send_composed_key_when_left_alt_is_pressed = true
+config.send_composed_key_when_right_alt_is_pressed = true
+config.keys = {
+    { key = "r", mods = "CMD", action = wezterm.action.SendKey { key = "r", mods = "CTRL" } },
+    { key = "s", mods = "CMD", action = wezterm.action.SendKey { key = "s", mods = "CTRL" } },
+}
+
 return config

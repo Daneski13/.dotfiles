@@ -171,9 +171,12 @@ require("null-ls").setup({
 })
 
 -- lsp loader progress
-require("fidget").setup({
-	window = {
-		-- make transparent
-		blend = 0,
+fidget = require("fidget")
+fidget.setup({
+	notification = {
+		window = {
+			winblend = 0,
+		},
 	},
 })
+vim.notify = fidget.notify

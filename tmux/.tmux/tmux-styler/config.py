@@ -15,11 +15,11 @@ def main():
     # Left side
     left_side = [
         Segment(SegmentType.FUNCTION, "session_name",
-                HexColor("#cd9d49"), Color256(234), style=Style(attrs=[TextAttributes.BOLD])),
+                HexColor("#5d7d8a"), Color256(234), style=Style(attrs=[TextAttributes.BOLD])),
     ]
     # Right side
     right_side = [
-        Segment(SegmentType.FUNCTION, "cwd", HexColor("#6b74b1"), Color256(
+        Segment(SegmentType.FUNCTION, "cwd", HexColor("#4978c4"), Color256(
             233)),
         Segment(SegmentType.FUNCTION, "date_day", separator=""),
         Segment(SegmentType.FUNCTION, "date", separator="|"),

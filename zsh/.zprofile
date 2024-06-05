@@ -4,6 +4,7 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	# homebrew
 	eval "$(/opt/homebrew/bin/brew shellenv)"
+	export HOMEBREW_NO_AUTO_UPDATE=1
 
 	FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 

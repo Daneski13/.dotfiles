@@ -1,10 +1,4 @@
 [[item]]
-file = "~/.config/iTerm2/colors.itermcolors"
-template = "iterm2"
-rewrite = true
-hook = "iterm2Color"
-
-[[item]]
 file = "~/.config/spicetify/Themes/Wallpaper/color.ini"
 template = "spotify"
 rewrite = true

@@ -42,6 +42,7 @@ require("copilot").setup({
 local cmp = require("cmp")
 require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
+	buffer = vim.api.nvim_get_current_buf(),
 	-- mappings
 	mapping = {
 		-- use tab for both copilot and cmp, when copilot is visible accept, otherwise select next item on cmp. Remember arrow keys still work on cmp
@@ -105,6 +106,7 @@ lsp.on_attach(function(_, bufnr)
 
 	-- format on save
 	lsp.buffer_autoformat()
+	-- vim.g.rustfmt_autosave = 1
 
 	-- go to definition, declaration, implementation, references
 	vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, opts)
